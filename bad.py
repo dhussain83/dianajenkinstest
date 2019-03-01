@@ -10,7 +10,7 @@ logger = open('errorami.log','w+')
 logger.write('=====================Start=====================\n')
 logger.write('List of AMI factory distribution errors\n')
 
-for bad_file in glob.glob("/dianabuild/*/output.test"):
+for bad_file in glob.glob("output.test"):
 
 
 	log = open(bad_file)
