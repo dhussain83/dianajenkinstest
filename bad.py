@@ -23,9 +23,5 @@ for bad_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/out
 			full_log = open(bad_file)
 			for log_line in full_log:
 				logger.write(log_line)
-		elif "6" in line:
-			full_log = open(bad_file)
-			for log_line in full_log:
-				logger.write(log_line)
 
 logger.close()
