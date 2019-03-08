@@ -41,7 +41,7 @@ for good_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/ou
 	full_log = open(good_file)
 	for line in full_log:
 		if "031931797306" in line:
-			full_log = open(bad_file)
+			full_log = open(good_file)
 			for log_line in full_log:
 				logger.write(log_line)
 logger.close()
