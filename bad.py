@@ -50,3 +50,15 @@ for good_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/ou
 			#for log_line in full_log:
 				#logger.write(log_line)
 logger.close()
+
+try:
+session = get_master_credentials(image_account,access_key,secret_key)
+        s3 = session.client('s3')
+        try:
+           bucket = 'aig-image-factory-logs'
+           directory_name = "/errorreports"
+           path = os.path.join(aws_account_number, timestamp, master_ami_name, directory_name)
+           s3.upload_file('errorami.log', bucket, path)
+except Exception as e:
+         print(e)
+         raise(e)
