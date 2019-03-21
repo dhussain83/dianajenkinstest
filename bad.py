@@ -53,7 +53,7 @@ for good_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/ou
 logger.close()
 
 s3 = boto3.client('s3')
-filename = 'errorami.log'
+filename = '/errorreports/errorami.log'
 bucket_name = 'dianahjenkinsaigbucket'
 directory_name = "/errorreports"
 path = os.path.join(directory_name)
