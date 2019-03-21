@@ -71,7 +71,7 @@ filename = 'errorami.log'
 bucket_name = 'dianahjenkinsaigbucket'
 directory_name = "errorreports"
 path = os.path.join(directory_name)
-s3.upload_file(filename, bucket_name, directory_name)
+s3.upload_file(filename, bucket_name, path)
 
 #sns = boto3.client('sns')
 #response = sns.publish(
