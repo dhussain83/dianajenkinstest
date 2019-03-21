@@ -63,3 +63,11 @@ session = get_master_credentials(image_account,access_key,secret_key)
 except Exception as e:
          print(e)
          raise(e)
+
+session = get_master_credentials(image_account,access_key,secret_key)
+	sns = boto3.client('sns')
+	response = sns.publish(
+    	TopicArn='arn:aws:sns:region:0123456789:my-topic-arn',    
+    	Message='A new report is available for dianajenkinsaigbucket',    
+)
+	print(response)
