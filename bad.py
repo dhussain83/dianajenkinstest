@@ -52,22 +52,17 @@ for good_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/ou
 				#logger.write(log_line)
 logger.close()
 
-try:
-  session = get_master_credentials(image_account,access_key,secret_key)
-      s3 = session.client('s3')
-      try:
-         bucket = 'dianahjenkinsaigbucket'
-         directory_name = "/errorreports"
-         path = os.path.join(aws_account_number, timestamp, master_ami_name, directory_name)
-         s3.upload_file('errorami.log', bucket, path)
-except Exception as e:
-         print(e)
-         raise(e)
+session = get_master_credentials(image_account,access_key,secret_key)
+s3 = session.client('s3')
+bucket = 'dianahjenkinsaigbucket'
+directory_name = "/errorreports"
+path = os.path.join(aws_account_number, timestamp, master_ami_name, directory_name)
+s3.upload_file('errorami.log', bucket, path)
 
 session = get_master_credentials(image_account,access_key,secret_key)
-  sns = boto3.client('sns')
-  response = sns.publish(
-  TopicArn='arn:aws:sns:us-west-2:708054772159:aigtestsns',    
-  Message='A new report is available for dianajenkinsaigbucket',    
+sns = boto3.client('sns')
+response = sns.publish(
+TopicArn='arn:aws:sns:us-west-2:708054772159:aigtestsns',    
+Message='A new report is available for dianajenkinsaigbucket',    
 )
-	print(response)
+
