@@ -53,9 +53,9 @@ for good_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/ou
 logger.close()
 
 s3 = boto3.client('s3')
-filename = '/errorreports/errorami.log'
+filename = 'errorami.log'
 bucket_name = 'dianahjenkinsaigbucket'
-directory_name = "/errorreports"
+directory_name = "bucket_name/errorreports"
 path = os.path.join(directory_name)
 s3.upload_file(filename, bucket_name, filename)
 
