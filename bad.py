@@ -60,6 +60,7 @@ logger.close()
 
 client = boto3.client('s3')
 resource = boto3.resource('s3')
+s3 = session.client('s3', region=region_name)
 my_bucket = resource.Bucket('dianahjenkinsaigbucket')
 directory_name = "/errorreports"
 path = os.path.join(directory_name)
