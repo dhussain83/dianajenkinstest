@@ -69,6 +69,8 @@ logger.close()
 s3 = boto3.client('s3')
 filename = 'errorami.log'
 bucket_name = 'dianahjenkinsaigbucket'
+directory_name = "/errorreports"
+path = os.path.join(directory_name)
 s3.upload_file(filename, bucket_name, filename)
 
 #sns = boto3.client('sns')
