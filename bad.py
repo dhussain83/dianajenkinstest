@@ -58,14 +58,19 @@ logger.close()
 #path = os.path.join(aws_account_number, timestamp, master_ami_name, directory_name)
 #s3.upload_file('errorami.log', bucket, path)
 
-client = boto3.client('s3')
-resource = boto3.resource('s3')
-s3 = session.client('s3', region=region_name)
-my_bucket = resource.Bucket('dianahjenkinsaigbucket')
-directory_name = "/errorreports"
-path = os.path.join(directory_name)
-s3.upload_file('errorami.log', bucket, path)
-		      
+#client = boto3.client('s3')
+#resource = boto3.resource('s3')
+#s3 = session.client('s3', region=region_name)
+#my_bucket = resource.Bucket('dianahjenkinsaigbucket')
+#directory_name = "/errorreports"
+#path = os.path.join(directory_name)
+#s3.upload_file('errorami.log', bucket, path)
+
+s3 = boto3.client('s3')
+filename = 'errorami.log'
+bucket_name = 'dianahjenkinsaigbucket'
+s3.upload_file(filename, bucket_name, filename
+
 sns = boto3.client('sns')
 response = sns.publish(
 TopicArn='arn:aws:sns:us-west-2:708054772159:aigtestsns',    
