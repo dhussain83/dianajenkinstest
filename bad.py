@@ -62,7 +62,7 @@ client = boto3.client('s3')
 resource = boto3.resource('s3')
 my_bucket = resource.Bucket('dianahjenkinsaigbucket')
 directory_name = "/errorreports"
-path = os.path.join(aws_account_number, timestamp, master_ami_name, directory_name)
+path = os.path.join(directory_name)
 s3.upload_file('errorami.log', bucket, path)
 		      
 sns = boto3.client('sns')
