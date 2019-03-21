@@ -71,9 +71,9 @@ filename = 'errorami.log'
 bucket_name = 'dianahjenkinsaigbucket'
 s3.upload_file(filename, bucket_name, filename)
 
-sns = boto3.client('sns')
-response = sns.publish(
-TopicArn='arn:aws:sns:us-west-2:708054772159:aigtestsns',    
-Message='A new report is available for dianajenkinsaigbucket',    
-)
+#sns = boto3.client('sns')
+#response = sns.publish(
+#TopicArn='arn:aws:sns:us-west-2:708054772159:aigtestsns',    
+#Message='A new report is available for dianajenkinsaigbucket',    
+#)
 
