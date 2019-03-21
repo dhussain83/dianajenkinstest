@@ -53,7 +53,7 @@ for good_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/ou
 logger.close()
 
 try:
-session = get_master_credentials(image_account,access_key,secret_key)
+  session = get_master_credentials(image_account,access_key,secret_key)
         s3 = session.client('s3')
         try:
            bucket = 'dianahjenkinsaigbucket'
