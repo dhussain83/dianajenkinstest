@@ -52,12 +52,19 @@ for good_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/ou
 				#logger.write(log_line)
 logger.close()
 
-s3 = session.client('s3')
-bucket = 'dianahjenkinsaigbucket'
+#s3 = session.client('s3')
+#bucket = 'dianahjenkinsaigbucket'
+#directory_name = "/errorreports"
+#path = os.path.join(aws_account_number, timestamp, master_ami_name, directory_name)
+#s3.upload_file('errorami.log', bucket, path)
+
+client = boto3.client('s3')
+resource = boto3.resource('s3')
+my_bucket = resource.Bucket('dianahjenkinsaigbucket')
 directory_name = "/errorreports"
 path = os.path.join(aws_account_number, timestamp, master_ami_name, directory_name)
 s3.upload_file('errorami.log', bucket, path)
-
+		      
 sns = boto3.client('sns')
 response = sns.publish(
 TopicArn='arn:aws:sns:us-west-2:708054772159:aigtestsns',    
