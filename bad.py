@@ -46,16 +46,16 @@ for good_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/ou
 	for good_file in good_files:
 	    full_log = open(good_file)
 	    for line in full_log:
-	    print(line)
-	    match =  re.search("RHEL[0-9].[0-9]*", log_line)
-	    print(match.group())
-	    try :
-		flavor_number = os_flavors[match.group()]
-		flavor_number = flavor_number + 1
-		os_flavors[match.group()]= flavor_number
-	    except: 
-		os_flavors[match.group()] = 1
-		logger.write(line)
+	        print(line)
+	        match =  re.search("RHEL[0-9].[0-9]*", log_line)
+	        print(match.group())
+	        try :
+		    flavor_number = os_flavors[match.group()]
+		    flavor_number = flavor_number + 1
+		    os_flavors[match.group()]= flavor_number
+	        except: 
+		    os_flavors[match.group()] = 1
+		    logger.write(line)
 		
 	
 	#full_log = open(good_file)
