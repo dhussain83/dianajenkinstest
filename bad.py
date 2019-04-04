@@ -5,7 +5,7 @@ import sys
 import re
 import glob
 
-os_flavors = {"RHEL7.4": 0,"RHEL7.5":0 ,"RHEL7.3":0, "Windows2012": 0}
+os_flavors = {"156661170251": 0}
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
@@ -47,7 +47,7 @@ for good_file in glob.glob("/var/lib/jenkins/workspace/copy_test/dianabuild/*/ou
 	    full_log = open(good_file)
 	    for line in full_log:
 	        print(line)
-	        match =  re.search("RHEL[0-9].[0-9]*", log_line)
+	        match =  re.search("156661170251", log_line)
 	        print(match.group())
 	        try :
 		    flavor_number = os_flavors[match.group()]
