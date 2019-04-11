@@ -1,0 +1,5 @@
+import boto3
+
+client = session.client('marketplace-entitlement', verify=False)
+entitlements = client.get_entitlements(ProductCode='aw0evgkw8e5c1q413zgy5pjce')
+pp.pprint(entitlements)
