@@ -3,7 +3,7 @@ import boto3
 
 EC2 = boto3.client('ec2')
 response = EC2.describe_images(
-    Owners=['708054772159'], # CentOS
+    Owners=['679593333241'], # CentOS
     Filters=[
       {'Name': 'name', 'Values': ['CentOS Linux 7 x86_64 HVM EBS *']},
       {'Name': 'architecture', 'Values': ['x86_64']},
