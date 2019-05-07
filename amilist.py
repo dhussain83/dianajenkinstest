@@ -7,8 +7,7 @@ Owners=['309956199498'], # RHEL6.8
 Filters=[
   {'Name': 'name', 'Values': ['RHEL-6.8_HVM_GA*Access*']},
   ],
-
-
+)
 amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
