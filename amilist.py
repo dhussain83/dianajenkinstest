@@ -11,4 +11,4 @@ Filters=[
 amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
-print amis[0]['ImageId']
+print(amis[0]['ImageId'])
