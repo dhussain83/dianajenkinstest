@@ -6,6 +6,7 @@ response = EC2.describe_images(
     Owners=['309956199498'], # RHEL6.8
     Filters=[
       {'Name': 'name', 'Values': ['RHEL-6.8_HVM_GA*Access*']},
+    ],
 )
 
 amis = sorted(response['Images'],
