@@ -92,13 +92,8 @@ logger.write(amis[0]['ImageId'])
 logger.close
 
 import difflab
-with open('default/testami.log', 'r') as amilist0:
-    with open(previousamilist/testami.log', 'r') as amilist1:
-        diff = difflib.unified_diff(
-            amilist0.readlines(),
-            amilist1.readlines(),
-            fromfile='amilist0',
-            tofile='amilist1',
-        )
-        for line in diff:
-            sys.stdout.write(line)
+file1 = "default/testami.log"
+file2 = "previousamilist/testami.log"
+
+diff = difflib.ndiff(open(file1).readlines(),open(file2).readlines())
+print ''.join(diff),
