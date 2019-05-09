@@ -13,9 +13,7 @@ amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
 print(amis[0]['ImageId'])
-fh = open("test.txt","w")
-write(amis[0]['ImageId'])
-fh.close()
+
 
 EC2 = boto3.client('ec2', region_name='us-east-1')
 response = EC2.describe_images(
