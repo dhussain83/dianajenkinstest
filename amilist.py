@@ -99,7 +99,7 @@ file2=open("previousamilist/default/testami.log","r")
 for line1 in file1:
         for line2 in file2:
                 if line1==line2:
-                        print("No update this ami id\n")
+                        print("No update found for this ami id\n")
                 else:
                         #send_SNS notification
                         print("Updated ami id found. Sending sns notification...")
