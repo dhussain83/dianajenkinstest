@@ -93,6 +93,10 @@ amis = sorted(response['Images'],
 logger.write(amis[0]['ImageId'])
 logger.close
 
+
+filetest=open("testami.log")
+print(filetest.readlines())
+
 file1=open("testami.log","r")
 file2=open("previousamilist/default/testami.log","r")
 for line1 in file1:
