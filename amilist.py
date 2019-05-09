@@ -93,19 +93,24 @@ amis = sorted(response['Images'],
 logger.write(amis[0]['ImageId'])
 logger.close
 
+import glob
+path = '.'
+files = [f for f in glob.glob(path + "**/*.txt", recursive=True)]
+for f in files:
+    print(f)
 
-filetest=open("/var/lib/jenkins/workspace/self/default/testami.log","r")
-print(filetest.readlines())
+#filetest=open("/var/lib/jenkins/workspace/self/default/testami.log","r")
+#print(filetest.readlines())
 
-file1=open("/var/lib/jenkins/workspace/self/default/testami.log","r")
-file2=open("/var/lib/jenkins/workspace/self/previousamilist/default/testami.log","r")
-for line1 in file1:
-        for line2 in file2:
-                if line1==line2:
-                        print("Same\n")
-                else:
-                        #send_SNS notification
-                        print("Difference in AMI ids")
-                break
-file1.close()
-file2.close()
+#file1=open("/var/lib/jenkins/workspace/self/default/testami.log","r")
+#file2=open("/var/lib/jenkins/workspace/self/previousamilist/default/testami.log","r")
+#for line1 in file1:
+#        for line2 in file2:
+#                if line1==line2:
+#                        print("Same\n")
+#                else:
+#                        #send_SNS notification
+#                        print("Difference in AMI ids")
+#                break
+#file1.close()
+#file2.close()
