@@ -95,7 +95,7 @@ logger.close
 
 file1=open("testami.log")
 file2=open("previousamilist/default/testami.log")
-for line1 in f1:
+for line1 in file1:
         for line2 in file2:
                 if line1==line2:
                         print("Same\n")
