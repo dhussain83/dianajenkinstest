@@ -91,7 +91,7 @@ amis = sorted(response['Images'],
               reverse=True)
 #print(amis[0]['ImageId'])
 logger.write(amis[0]['ImageId'])
-logger.close
+logger.close()
 
 filetest=open("testami.log","r")
 print(filetest.readlines())
