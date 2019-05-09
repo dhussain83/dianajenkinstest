@@ -94,10 +94,10 @@ logger.write(amis[0]['ImageId'])
 logger.close
 
 
-filetest=open("default/testami.log","r")
+filetest=open("$WORKSPACE/default/testami.log","r")
 print(filetest.readlines())
 
-file1=open("default/testami.log","r")
+file1=open("$WORKSPACE/default/testami.log","r")
 file2=open("previousamilist/default/testami.log","r")
 for line1 in file1:
         for line2 in file2:
