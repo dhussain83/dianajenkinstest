@@ -98,7 +98,7 @@ filetest=open("$WORKSPACE/default/testami.log","r")
 print(filetest.readlines())
 
 file1=open("$WORKSPACE/default/testami.log","r")
-file2=open("previousamilist/default/testami.log","r")
+file2=open("$WORKSPACE/previousamilist/default/testami.log","r")
 for line1 in file1:
         for line2 in file2:
                 if line1==line2:
