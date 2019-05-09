@@ -2,6 +2,8 @@ import json
 import boto3
 import sys
 import logging
+import difflib
+
 
 logger = open('testami.log','w+')
 
@@ -91,7 +93,7 @@ amis = sorted(response['Images'],
 logger.write(amis[0]['ImageId'])
 logger.close
 
-import difflab
+
 file1 = "default/testami.log"
 file2 = "previousamilist/testami.log"
 
