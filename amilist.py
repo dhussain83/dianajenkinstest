@@ -95,7 +95,7 @@ logger.close
 
 import glob
 path = '.'
-files = [f for f in glob.glob(path + "**/*.txt")]
+files = [f for f in glob.glob(path + "**/*")]
 for f in files:
     print(f)
 
