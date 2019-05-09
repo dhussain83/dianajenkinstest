@@ -90,3 +90,17 @@ amis = sorted(response['Images'],
 #print(amis[0]['ImageId'])
 logger.write(amis[0]['ImageId'])
 logger.close
+
+import difflab
+with open('default/testami.log', 'r') as amilist0:
+    with open('previousamilist/testami.log', 'r') as amilist1:
+with open('default/testami.log', 'r') as amilist0:
+    with open(previousamilist/testami.log', 'r') as amilist1:
+        diff = difflib.unified_diff(
+            amilist0.readlines(),
+            amilist1.readlines(),
+            fromfile='amilist0',
+            tofile='amilist1',
+        )
+        for line in diff:
+            sys.stdout.write(line)
