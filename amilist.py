@@ -93,9 +93,15 @@ amis = sorted(response['Images'],
 logger.write(amis[0]['ImageId'])
 logger.close
 
-
-file1 = "testami.log"
-file2 = "previousamilist/default/testami.log"
-
-diff = difflib.ndiff(open(file1).readlines(),open(file2).readlines())
-print ''.join(diff),
+file1=open("testami.log")
+file2=open("previousamilist/default/testami.log")
+for line1 in f1:
+        for line2 in file2:
+                if line1==line2:
+                        print("Same\n")
+                else:
+                        #send_SNS notification
+                        print("not the same")
+                break
+file1.close()
+file2.close()
