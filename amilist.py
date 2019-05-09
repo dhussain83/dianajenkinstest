@@ -93,8 +93,6 @@ logger.close
 
 import difflab
 with open('default/testami.log', 'r') as amilist0:
-    with open('previousamilist/testami.log', 'r') as amilist1:
-with open('default/testami.log', 'r') as amilist0:
     with open(previousamilist/testami.log', 'r') as amilist1:
         diff = difflib.unified_diff(
             amilist0.readlines(),
