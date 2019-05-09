@@ -93,11 +93,11 @@ amis = sorted(response['Images'],
 logger.write(amis[0]['ImageId'])
 logger.close
 
-filetest=open("default/testami.log","r")
+filetest=open("testami.log","r")
 print(filetest.readlines())
 
-file1=open("default/testami.log","r")
-file2=open("default/previousamilist/default/testami.log","r")
+file1=open("testami.log","r")
+file2=open("previousamilist/default/testami.log","r")
 for line1 in file1:
         for line2 in file2:
                 if line1==line2:
