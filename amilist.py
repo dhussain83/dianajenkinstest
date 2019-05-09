@@ -101,7 +101,7 @@ for line1 in file1:
                         print("Same\n")
                 else:
                         #send_SNS notification
-                        print("not the same")
+                        print("Difference in AMI ids")
                 break
 file1.close()
 file2.close()
