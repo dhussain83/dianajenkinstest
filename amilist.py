@@ -16,7 +16,7 @@ amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
 logger.write(amis[0]['ImageId'])
-
+logger.close
 
 EC2 = boto3.client('ec2', region_name='us-east-1')
 response = EC2.describe_images(
