@@ -21,7 +21,7 @@ logger.write(amis[0]['ImageId'])
 logger.write("\n")
 
 
-EC2 = boto3.client('ec2', region_name='us-east-1')
+
 response = EC2.describe_images(
 Owners=['309956199498'], # RHEL6.9
 Filters=[
@@ -36,7 +36,7 @@ logger.write(amis[0]['ImageId'])
 logger.write("\n")
 
 
-EC2 = boto3.client('ec2', region_name='us-east-1')
+
 response = EC2.describe_images(
 Owners=['309956199498'], # RHEL6.10
 Filters=[
@@ -51,7 +51,7 @@ logger.write(amis[0]['ImageId'])
 logger.write("\n")
 
 
-EC2 = boto3.client('ec2', region_name='us-east-1')
+
 response = EC2.describe_images(
 Owners=['309956199498'], # RHEL7.4
 Filters=[
@@ -65,7 +65,7 @@ amis = sorted(response['Images'],
 logger.write(amis[0]['ImageId'])
 logger.write("\n")
 
-EC2 = boto3.client('ec2', region_name='us-east-1')
+
 response = EC2.describe_images(
 Owners=['309956199498'], # RHEL7.5
 Filters=[
@@ -79,7 +79,7 @@ amis = sorted(response['Images'],
 logger.write(amis[0]['ImageId'])
 logger.write("\n")
 
-EC2 = boto3.client('ec2', region_name='us-east-1')
+
 response = EC2.describe_images(
 Owners=['309956199498'], # RHEL7.6
 Filters=[
