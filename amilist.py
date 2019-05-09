@@ -15,7 +15,8 @@ Filters=[
 amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
-logger.write(amis[0]['ImageId'])("\n")
+logger.write(amis[0]['ImageId'])
+logger.write("\n")
 
 
 EC2 = boto3.client('ec2', region_name='us-east-1')
