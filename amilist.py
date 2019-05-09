@@ -95,7 +95,7 @@ logger.close
 
 
 file1 = "testami.log"
-file2 = "previousamilist/testami.log"
+file2 = "previousamilist/default/testami.log"
 
 diff = difflib.ndiff(open(file1).readlines(),open(file2).readlines())
 print ''.join(diff),
