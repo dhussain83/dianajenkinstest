@@ -1,6 +1,9 @@
 import json
 import boto3
 import sys
+import logging
+
+logger = open('testami.log','w+')
 
 EC2 = boto3.client('ec2', region_name='us-east-1')
 response = EC2.describe_images(
@@ -12,7 +15,7 @@ Filters=[
 amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
-print(amis[0]['ImageId'])
+logger.write(amis[0]['ImageId'])
 
 
 EC2 = boto3.client('ec2', region_name='us-east-1')
