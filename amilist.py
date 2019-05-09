@@ -94,7 +94,7 @@ logger.write(amis[0]['ImageId'])
 logger.close
 
 
-file1 = "default/testami.log"
+file1 = "testami.log"
 file2 = "previousamilist/testami.log"
 
 diff = difflib.ndiff(open(file1).readlines(),open(file2).readlines())
