@@ -94,7 +94,7 @@ logger.write(amis[0]['ImageId'])
 logger.close
 
 
-filetest=open("testami.log")
+filetest=open("testami.log","r")
 print(filetest.readlines())
 
 file1=open("testami.log","r")
