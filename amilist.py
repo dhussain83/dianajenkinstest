@@ -142,7 +142,7 @@ for ami in amis:
 	}
     )
     if original_item['item'] or original_item ['item']['ImageId'] !=  ami['ImageId']: 
-	respone = table.put_item(
+	response = table.put_item(
 	    Item={
 		'AMI': ami['Name'],
 		'LatestID': ami['ImageId']
