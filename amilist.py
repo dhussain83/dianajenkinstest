@@ -56,15 +56,6 @@ amis = sorted(response['Images'],
               reverse=True)
 print(amis[0]['ImageId'])
 
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-table = dynamodb.Table('Latestamis')
-
-table.put_item(
-   Item={
-        'AMI': 'RHEL6.8',
-        'LatestID': '[ImageId]',
-    }
-)
 #logger.write(amis[0]['ImageId'])
 #logger.write("\n")
 
@@ -141,7 +132,16 @@ print(amis[0]['ImageId'])
 #logger.write(amis[0]['ImageId'])
 #logger.close()
 
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+table = dynamodb.Table('Latestamis')
 
+for ami in amis:
+		table.put_item(
+			Item={
+				'AMI': ami['Name'],
+				'LatestID': ami['ImageId']
+			}
+		)
 #ile1=open("testami.log","r")
 #file2=open("previousamilist/default/testami.log","r")
 #for line1 in file1:
