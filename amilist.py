@@ -134,25 +134,42 @@ print(amis[0]['ImageId'])
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 table = dynamodb.Table('Latestamis')
-
 for ami in amis:
     original_item = table.get_item(
-	Key={
-	   'AMI': ami['Name'],
-	   'LatestID': ami['ImageId']
+	Item={
+	    'AMI': ami['Name'],
+	    'LatestID' : ami['ImageId']
 	}
     )
-    if original_item.LatestID == ami['ImageId']:
-	print("no need to update")
-    else:
-	response = table.put_item(
+    if original_item['item'] or original_item['item']['ImageId'] !=  ami['ImageId']: 
+	table.put_item(
 	    Item={
 		'AMI': ami['Name'],
 		'LatestID': ami['ImageId']
 	    }
 	)
 	ami['Name'].updated = True
-#ile1=open("testami.log","r")
+    else:
+	print("no need to update")
+
+#for ami in amis:
+#    original_item = table.get_item(
+#	Key={
+#	   'AMI': ami['Name'],
+#	   'LatestID': ami['ImageId']
+#	}
+#    )
+#    if original_item.LatestID == ami['ImageId']:
+#	print("no need to update")
+#    else:
+#	response = table.put_item(
+#	    Item={
+#		'AMI': ami['Name'],
+#		'LatestID': ami['ImageId']
+#	    }
+#	)
+#	ami['Name'].updated = True
+#file1=open("testami.log","r")
 #file2=open("previousamilist/default/testami.log","r")
 #for line1 in file1:
 #        for line2 in file2:
