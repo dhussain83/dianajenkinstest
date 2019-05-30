@@ -41,15 +41,6 @@ if table_name not in existing_tables:
 
 table = dynamodb.Table('Latestamis')
 
-table = dynamodb.Table('Latestamis')
-
-table.put_item(
-   Item={
-        'username': 'ruanb',
-        'first_name': ImageId'',
-    }
-)
-
 
 #logger = open('testami.log','w+')
 
@@ -65,6 +56,16 @@ amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
 print(amis[0]['ImageId'])
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('Latestamis')
+
+table.put_item(
+   Item={
+        'AMI': 'RHEL6.8',
+        'LatestID': '[ImageId]',
+    }
+)
 #logger.write(amis[0]['ImageId'])
 #logger.write("\n")
 
