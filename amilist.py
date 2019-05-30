@@ -141,7 +141,7 @@ for ami in amis:
 	    'LatestID' : ami['ImageId']
 	}
     )
-    if original_item['ami'] or original_item['ami']['ImageId'] !=  ami['ImageId']: 
+    if original_item['Name'] or original_item['ImageId'] !=  ami['ImageId']: 
 	table.put_item(
 	    Item={
 		'AMI': ami['Name'],
