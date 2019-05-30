@@ -144,7 +144,7 @@ for ami in amis:
     if original_item.LatestID == ami['ImageId']:
 	print("no need to update")
     else:
-	table.put_item(
+	response = table.put_item(
 	    Item={
 		'AMI': ami['Name'],
 		'LatestID': ami['ImageId']
