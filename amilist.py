@@ -136,12 +136,21 @@ dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 table = dynamodb.Table('Latestamis')
 
 for ami in amis:
+    original_item = table.get_item(
+	Item={
+	   'AMI': ami['Name']
+		}
+	)
+	if original_item.LatestID == ami['ImageId']:
+		print("no need to update")
+	else:
 		table.put_item(
 			Item={
 				'AMI': ami['Name'],
 				'LatestID': ami['ImageId']
 			}
 		)
+		ami['Name'].updated = True
 #ile1=open("testami.log","r")
 #file2=open("previousamilist/default/testami.log","r")
 #for line1 in file1:
