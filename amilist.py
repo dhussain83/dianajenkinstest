@@ -136,7 +136,7 @@ dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 table = dynamodb.Table('Latestamis')
 for ami in amis:
     original_item = table.get_item(
-	Item={
+	Key={
 	    'AMI': ami['Name'],
 	    'LatestID' : ami['ImageId']
 	}
