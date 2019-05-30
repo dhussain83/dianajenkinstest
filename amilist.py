@@ -137,7 +137,7 @@ table = dynamodb.Table('Latestamis')
 
 for ami in amis:
     original_item = table.get_item(
-	Key={
+	Item={
 	   'AMI': ami['Name']
 	}
     )
