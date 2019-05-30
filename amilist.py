@@ -39,7 +39,6 @@ if table_name not in existing_tables:
         TableName=table_name,
     )
 
-table = dynamodb.Table('Latestamis')
 
 
 #logger = open('testami.log','w+')
