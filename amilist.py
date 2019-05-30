@@ -56,7 +56,7 @@ amis = sorted(response['Images'],
               reverse=True)
 print(amis[0]['ImageId'])
 
-dynamodb = boto3.resource('dynamodb')
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1'))
 table = dynamodb.Table('Latestamis')
 
 table.put_item(
