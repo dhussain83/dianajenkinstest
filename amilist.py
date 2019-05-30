@@ -137,8 +137,9 @@ table = dynamodb.Table('Latestamis')
 
 for ami in amis:
     original_item = table.get_item(
-	Item={
-	   'AMI': ami['Name']
+	Key={
+	   'AMI': ami['Name'],
+	   'LatestID': ami['ImageId']
 	}
     )
     if original_item.LatestID == ami['ImageId']:
