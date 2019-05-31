@@ -145,7 +145,7 @@ for ami in amis:
  
 try:
  	 original_item['Item']
-     except:
+except:
 	 original_item['Item'] = []
 
      if original_item['Item'] == [] or original_item['Item']['LatestID'] != ami['ImageId']: 
