@@ -141,16 +141,23 @@ for ami in amis:
 	    'LatestID' : ami['ImageId']
 	}
     )
-    if original_item['item'] or original_item ['item']['LatestID'] !=  ami['ImageId']: 
-	response = table.put_item(
-	    Item={
-		'AMI': ami['Name'],
-		'LatestID': ami['ImageId']
-	    }
-	)
-	ami['Name'].updated = True
-    else:
-	print("no need to update")
+#    if original_item['item'] or original_item ['item']['LatestID'] !=  ami['ImageId']: 
+ 
+try:
+ 	 original_item['Item']
+     except:
+	 original_item['Item'] = []
+
+     if original_item['Item'] == [] or original_item['Item']['LatestID'] != ami['ImageId']: 
+     response = table.put_item(
+	 Item={
+  	'AMI': ami['Name'],
+	'LatestID': ami['ImageId']
+         }
+     )
+     ami['Name'].updated = True
+else:
+     print("no need to update")
 
 #for ami in amis:
 #    original_item = table.get_item(
