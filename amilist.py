@@ -143,10 +143,10 @@ for ami in amis:
     )
 #    if original_item['item'] or original_item ['item']['LatestID'] !=  ami['ImageId']: 
  
-try:
- 	 original_item['Item']
-except:
-	 original_item['Item'] = []
+#try:
+# 	 original_item['Item']
+#except:
+#	 original_item['Item'] = []
 
 if original_item['Item']['LatestID'] != ami['ImageId']: 
      response = table.put_item(
