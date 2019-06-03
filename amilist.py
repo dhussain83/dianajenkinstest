@@ -42,12 +42,13 @@ def ami_updater(ami_name,ami_id):
 	except:
 		ami_in_db = []
 	if ami_in_db == [] or ami_in_db['LatestID'] != ami_id: 
-     		response = table.delete_item(
-		Key={
-  		'AMI': ami_name,
-		'LatestID': ami_in_db['LatestID']
-         	}
-     		)
+     		if ami_in_db != []:
+			response = table.delete_item(
+			Key={
+  			'AMI': ami_name,
+			'LatestID': ami_in_db['LatestID']
+         		}
+     			)
 		response = table.put_item(
 	 	Item={
   		'AMI': ami_name,
