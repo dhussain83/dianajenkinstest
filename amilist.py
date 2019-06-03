@@ -29,9 +29,11 @@ def ami_updater(ami_name,ami_id):
    	 )
 	
 #    if original_item['item'] or original_item ['item']['LatestID'] !=  ami['ImageId']: 
-
-
-	if original_item['Items'] == [] or original_item['Items']['LatestID'] != ami['ImageId']: 
+	try:
+		ami_in_db = original_item['Items'][0]
+	except:
+		ami_in_db = []
+	if ami_in_db == [] or ami_in_db['LatestID'] != ami_id: 
      		response = table.put_item(
 	 	Item={
   		'AMI': ami_name,
