@@ -25,7 +25,7 @@ def ami_lookup(list_of_filters):
               		key=lambda x: x['CreationDate'],
               		reverse=True)
 		ami_latest_list.append(sorted_list[0])
-	        print(ami_latest_list)
+	        
 	return ami_latest_list
         
 	
@@ -41,6 +41,7 @@ def ami_updater(ami_name,ami_id):
 		ami_in_db = original_item['Items'][0]
 	except:
 		ami_in_db = []
+	print(ami_in_db['LatestID'])
 	if ami_in_db == [] or ami_in_db['LatestID'] != ami_id: 
      		response = table.put_item(
 	 	Item={
