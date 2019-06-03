@@ -62,7 +62,6 @@ def ami_updater(ami_name,ami_id):
 		ami_updated.append([ami_name,updated])
      		print("no need to update")
 
-        print(ami_updated)
 	return ami_updated
 		
 dynamodb_client = boto3.client('dynamodb', region_name='us-east-1')
@@ -100,5 +99,8 @@ if table_name not in existing_tables:
 
 filter_list = ['RHEL-6.8_HVM_GA-20*Access*','RHEL-6.9*HVM_GA-20*Access*','RHEL-6.10*HVM_GA-20*Access*','RHEL-7.4*HVM_GA-20*Access*','RHEL-7.5_HVM_GA-20*Access*','RHEL-7.6*HVM_GA-20*Access*']
 images_returned = ami_lookup(filter_list)
+sns_notification = []
 for image in images_returned:
-	ami_updater(image['Name'],image['ImageId'])
+	sns_notification.append(ami_updater(image['Name'],image['ImageId']))
+print sns_notification
+
