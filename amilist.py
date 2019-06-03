@@ -25,7 +25,9 @@ def ami_lookup(list_of_filters):
               		key=lambda x: x['CreationDate'],
               		reverse=True)
 		ami_latest_list.append(sorted_list[0])
+	        print(ami_latest_list)
 	return ami_latest_list
+        
 	
 def ami_updater(ami_name,ami_id):
 	dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
