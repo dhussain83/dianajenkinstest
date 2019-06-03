@@ -19,8 +19,7 @@ def ami_lookup(list_of_filters):
 			}
 			]
 			)
-	#return response['Images']
-        amis = sorted(response['Images'],
+	return sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
 	print(amis[0]['ImageId'])
