@@ -102,5 +102,5 @@ images_returned = ami_lookup(filter_list)
 sns_notification = []
 for image in images_returned:
 	sns_notification.append(ami_updater(image['Name'],image['ImageId']))
-print sns_notification
+print(sns_notification)
 
