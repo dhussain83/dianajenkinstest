@@ -42,7 +42,7 @@ def ami_updater(ami_name,ami_id):
 	except:
 		ami_in_db = []
 	if ami_in_db == [] or ami_in_db['LatestID'] != ami_id: 
-     		response = table.put_item(
+     		response = table.update_item(
 	 	Item={
   		'AMI': ami_name,
 		'LatestID': ami_id
