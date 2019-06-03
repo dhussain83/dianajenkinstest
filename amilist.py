@@ -34,8 +34,8 @@ def ami_updater(ami_name,ami_id):
 	if original_item['Items'] == [] or original_item['Items']['LatestID'] != ami['ImageId']: 
      		response = table.put_item(
 	 	Item={
-  		'AMI': ami['Name'],
-		'LatestID': ami['ImageId']
+  		'AMI': ami_name,
+		'LatestID': ami_id
          	}
      		)
      		updated = True
