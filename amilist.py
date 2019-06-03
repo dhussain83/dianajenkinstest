@@ -61,7 +61,9 @@ def ami_updater(ami_name,ami_id):
 		ami_updated.append([ami_name,updated])
      		print("no need to update")
 
-
+        print(ami_updated)
+	return ami_updated
+		
 dynamodb_client = boto3.client('dynamodb', region_name='us-east-1')
 table_name = 'Latestamis'
 existing_tables = dynamodb_client.list_tables()['TableNames']
