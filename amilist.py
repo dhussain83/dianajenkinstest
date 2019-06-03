@@ -9,8 +9,10 @@ from boto3.dynamodb.conditions import Key, Attr
 ami_updated = []
 
 def ami_lookup(list_of_filters):
+	ami_latest_list = []
 	EC2 = boto3.client('ec2', region_name='us-east-1')
-	response = EC2.describe_images(
+	for filter in list_of_filters:
+		response = EC2.describe_images(
 			Owners=['309956199498'], # RHEL6.8
 			Filters=[
 			{
@@ -19,10 +21,11 @@ def ami_lookup(list_of_filters):
 			}
 			]
 			)
-	return sorted(response['Images'],
-              key=lambda x: x['CreationDate'],
-              reverse=True)
-	print(amis[0]['ImageId'])
+		sorted_list = sorted(response['Images'],
+              		key=lambda x: x['CreationDate'],
+              		reverse=True)
+		ami_latest_list.append(sorted_list[0])
+	return ami_latest_list
 	
 def ami_updater(ami_name,ami_id):
 	dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
