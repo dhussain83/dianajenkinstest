@@ -5,6 +5,39 @@ import logging
 import difflib
 
 #creating dynamodb table, if not already create
+ami_updated = []
+def ami_updater(ami_name,ami_id):
+	dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+	table = dynamodb.Table('Latestamis')
+	for ami in amis:
+    	original_item = table.get_item(
+		Key={
+	    	'AMI': ami['Name'],
+	    	'LatestID' : ami['ImageId']
+		}
+   	 )
+#    if original_item['item'] or original_item ['item']['LatestID'] !=  ami['ImageId']: 
+ 
+	try:
+ 	 	original_item['Item']
+	except:
+	 	original_item['Item'] = []
+	print(original_item['Item'])
+
+	if original_item['Item'] == [] or original_item['Item']['LatestID'] != ami['ImageId']: 
+     		response = table.put_item(
+	 	Item={
+  		'AMI': ami['Name'],
+		'LatestID': ami['ImageId']
+         	}
+     		)
+     		updated = True
+		ami_updated.append([ami_name,updated])
+	else:	
+		updated = False
+		ami_updated.append([ami_name,updated])
+     		print("no need to update")
+
 
 dynamodb_client = boto3.client('dynamodb', region_name='us-east-1')
 table_name = 'Latestamis'
@@ -54,6 +87,7 @@ Filters=[
 amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
+ami_updater(amis[0]['Name'],amis[0]['ImageId'])
 print(amis[0]['ImageId'])
 
 #logger.write(amis[0]['ImageId'])
@@ -85,6 +119,7 @@ Filters=[
 amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
+ami_updater(amis[0]['Name'],amis[0]['ImageId'])
 print(amis[0]['ImageId'])
 #logger.write(amis[0]['ImageId'])
 #logger.write("\n")
@@ -114,6 +149,7 @@ Filters=[
 amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
+ami_updater(amis[0]['Name'],amis[0]['ImageId'])
 print(amis[0]['ImageId'])
 #logger.write(amis[0]['ImageId'])
 #logger.write("\n")
@@ -128,37 +164,10 @@ Filters=[
 amis = sorted(response['Images'],
               key=lambda x: x['CreationDate'],
               reverse=True)
+ami_updater(amis[0]['Name'],amis[0]['ImageId'])
 print(amis[0]['ImageId'])
 #logger.write(amis[0]['ImageId'])
 #logger.close()
-
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-table = dynamodb.Table('Latestamis')
-for ami in amis:
-    original_item = table.get_item(
-	Key={
-	    'AMI': ami['Name'],
-	    'LatestID' : ami['ImageId']
-	}
-    )
-#    if original_item['item'] or original_item ['item']['LatestID'] !=  ami['ImageId']: 
- 
-try:
- 	 original_item['Item']
-except:
-	 original_item['Item'] = []
-print(original_item['Item'])
-
-if original_item['Item'] == [] or original_item['Item']['LatestID'] != ami['ImageId']: 
-     response = table.put_item(
-	 Item={
-  	'AMI': ami['Name'],
-	'LatestID': ami['ImageId']
-         }
-     )
-     ami['Name'].updated = True
-else:
-     print("no need to update")
 
 #for ami in amis:
 #    original_item = table.get_item(
