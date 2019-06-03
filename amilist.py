@@ -147,6 +147,7 @@ try:
  	 original_item['Item']
 except:
 	 original_item['Item'] = []
+print(original_item['Item'])
 
 if original_item['Item'] == [] or original_item['Item']['LatestID'] != ami['ImageId']: 
      response = table.put_item(
