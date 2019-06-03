@@ -17,7 +17,7 @@ def ami_lookup(list_of_filters):
 			Filters=[
 			{
 			'Name':'name',
-			'Values': list_of_filters
+			'Values': filter
 			}
 			]
 			)
@@ -41,7 +41,6 @@ def ami_updater(ami_name,ami_id):
 		ami_in_db = original_item['Items'][0]
 	except:
 		ami_in_db = []
-	print(ami_in_db['LatestID'])
 	if ami_in_db == [] or ami_in_db['LatestID'] != ami_id: 
      		response = table.put_item(
 	 	Item={
