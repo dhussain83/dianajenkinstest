@@ -3,28 +3,35 @@ import boto3
 import sys
 import logging
 import difflib
+from boto3.dynamodb.conditions import Key, Attr
 
 #creating dynamodb table, if not already create
 ami_updated = []
+
+def ami_lookup(list_of_filters):
+	EC2 = boto3.client('ec2', region_name='us-east-1')
+	response = EC2.describe_images(
+			Owners=['309956199498'], # RHEL6.8
+			Filters=[
+			{
+			'Name':'name',
+			'Values': list_of_filters
+			}
+			]
+			)
+	return response['Images']
+	
 def ami_updater(ami_name,ami_id):
 	dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 	table = dynamodb.Table('Latestamis')
-	for ami in amis:
-    	original_item = table.get_item(
-		Key={
-	    	'AMI': ami['Name'],
-	    	'LatestID' : ami['ImageId']
-		}
+    	original_item = table.query(
+		 KeyConditionExpression=Key('AMI').eq(ami_name)
    	 )
+	
 #    if original_item['item'] or original_item ['item']['LatestID'] !=  ami['ImageId']: 
- 
-	try:
- 	 	original_item['Item']
-	except:
-	 	original_item['Item'] = []
-	print(original_item['Item'])
 
-	if original_item['Item'] == [] or original_item['Item']['LatestID'] != ami['ImageId']: 
+
+	if original_item['Items'] == [] or original_item['Items']['LatestID'] != ami['ImageId']: 
      		response = table.put_item(
 	 	Item={
   		'AMI': ami['Name'],
@@ -72,129 +79,7 @@ if table_name not in existing_tables:
         TableName=table_name,
     )
 
-
-
-#logger = open('testami.log','w+')
-
-#checking RHEL 6.8 ami id
-EC2 = boto3.client('ec2', region_name='us-east-1')
-response = EC2.describe_images(
-Owners=['309956199498'], # RHEL6.8
-Filters=[
-  {'Name': 'name', 'Values': ['RHEL-6.8_HVM_GA-20*Access*']},
-  ],
-)
-amis = sorted(response['Images'],
-              key=lambda x: x['CreationDate'],
-              reverse=True)
-ami_updater(amis[0]['Name'],amis[0]['ImageId'])
-print(amis[0]['ImageId'])
-
-#logger.write(amis[0]['ImageId'])
-#logger.write("\n")
-
-
-#checking RHEL 6.9 ami id
-response = EC2.describe_images(
-Owners=['309956199498'], # RHEL6.9
-Filters=[
-  {'Name': 'name', 'Values': ['RHEL-6.9*HVM_GA-20*Access*']},
-  ],
-)
-amis = sorted(response['Images'],
-              key=lambda x: x['CreationDate'],
-              reverse=True)
-print(amis[0]['ImageId'])
-#logger.write(amis[0]['ImageId'])
-#logger.write("\n")
-
-
-#checking RHEL 6.10 ami id
-response = EC2.describe_images(
-Owners=['309956199498'], # RHEL6.10
-Filters=[
-  {'Name': 'name', 'Values': ['RHEL-6.10*HVM_GA-20*Access*']},
-  ],
-)
-amis = sorted(response['Images'],
-              key=lambda x: x['CreationDate'],
-              reverse=True)
-ami_updater(amis[0]['Name'],amis[0]['ImageId'])
-print(amis[0]['ImageId'])
-#logger.write(amis[0]['ImageId'])
-#logger.write("\n")
-
-
-#checking RHEL 7.4 ami id
-response = EC2.describe_images(
-Owners=['309956199498'], # RHEL7.4
-Filters=[
-  {'Name': 'name', 'Values': ['RHEL-7.4*HVM_GA-20*Access*']},
-  ],
-)
-amis = sorted(response['Images'],
-              key=lambda x: x['CreationDate'],
-              reverse=True)
-print(amis[0]['ImageId'])
-#logger.write(amis[0]['ImageId'])
-#logger.write("\n")
-
-#checking RHEL 7.5 ami id
-response = EC2.describe_images(
-Owners=['309956199498'], # RHEL7.5
-Filters=[
-  {'Name': 'name', 'Values': ['RHEL-7.5_HVM_GA-20*Access*']},
-  ],
-)
-amis = sorted(response['Images'],
-              key=lambda x: x['CreationDate'],
-              reverse=True)
-ami_updater(amis[0]['Name'],amis[0]['ImageId'])
-print(amis[0]['ImageId'])
-#logger.write(amis[0]['ImageId'])
-#logger.write("\n")
-
-#checking RHEL 7.6 ami id
-response = EC2.describe_images(
-Owners=['309956199498'], # RHEL7.6
-Filters=[
-  {'Name': 'name', 'Values': ['RHEL-7.6*HVM_GA-20*Access*']},
-  ],
-)
-amis = sorted(response['Images'],
-              key=lambda x: x['CreationDate'],
-              reverse=True)
-ami_updater(amis[0]['Name'],amis[0]['ImageId'])
-print(amis[0]['ImageId'])
-#logger.write(amis[0]['ImageId'])
-#logger.close()
-
-#for ami in amis:
-#    original_item = table.get_item(
-#	Key={
-#	   'AMI': ami['Name'],
-#	   'LatestID': ami['ImageId']
-#	}
-#    )
-#    if original_item.LatestID == ami['ImageId']:
-#	print("no need to update")
-#    else:
-#	response = table.put_item(
-#	    Item={
-#		'AMI': ami['Name'],
-#		'LatestID': ami['ImageId']
-#	    }
-#	)
-#	ami['Name'].updated = True
-#file1=open("testami.log","r")
-#file2=open("previousamilist/default/testami.log","r")
-#for line1 in file1:
-#        for line2 in file2:
-#                if line1==line2:
-#                        print("No update found for this ami id\n")
-#                else:
-#                        #send_SNS notification
-#                        print("Updated ami id found. Sending sns notification...")
-#                break
-#file1.close()
-#file2.close()
+filter_list = ['RHEL-6.8_HVM_GA-20*Access*','RHEL-6.9*HVM_GA-20*Access*','RHEL-6.10*HVM_GA-20*Access*','RHEL-7.4*HVM_GA-20*Access*','RHEL-7.5_HVM_GA-20*Access*','RHEL-7.6*HVM_GA-20*Access*']
+images_returned = ami_lookup(filter_list)
+for image in images_returned:
+	ami_updater(image['Name'],image['ImageId'])
