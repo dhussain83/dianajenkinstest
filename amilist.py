@@ -17,7 +17,7 @@ def ami_lookup(list_of_filters):
 			Filters=[
 			{
 			'Name':'name',
-			'Values': filter
+			'Values': [filter]
 			}
 			]
 			)
