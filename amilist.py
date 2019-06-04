@@ -2,7 +2,6 @@ import json
 import boto3
 import sys
 import logging
-import difflib
 from boto3.dynamodb.conditions import Key, Attr
 
 #creating dynamodb table, if not already create
