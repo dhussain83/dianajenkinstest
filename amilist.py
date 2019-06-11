@@ -36,32 +36,60 @@ def ami_updater(ami_name,ami_id):
    	 )
 	
 #    if original_item['item'] or original_item ['item']['LatestID'] !=  ami['ImageId']: 
-	try:
-		ami_in_db = original_item['Items'][0]
-	except:
-		ami_in_db = []
+#	try:
+#		ami_in_db = original_item['Items'][0]
+#	except:
+#		ami_in_db = []
 	if ami_in_db == [] or ami_in_db['LatestID'] != ami_id: 
-     		if ami_in_db != []:
-			response = table.delete_item(
-			Key={
-  			'AMI': ami_name,
-			'LatestID': ami_in_db['LatestID']
-         		}
-     			)
-		response = table.put_item(
-	 	Item={
+#     		if ami_in_db != []:
+#			response = table.delete_item(
+#			Key={
+#  			'AMI': ami_name,
+#			'LatestID': ami_in_db['LatestID']
+ #        		}
+ #    			)
+#		response = table.put_item(
+#	 	Item={
+#  		'AMI': ami_name,
+#		'LatestID': ami_id
+#         	}
+#     		)
+ #    		updated = True
+#		ami_updated.append([ami_name,updated])
+#	else:	
+#		updated = False
+#		ami_updated.append([ami_name,updated])
+ #    		print("no need to update")
+
+#	return ami_updated
+	
+try:
+	ami_in_db = original_item['Items'][0]
+except:
+	ami_in_db = []
+if ami_in_db == [] or ami_in_db['LatestID'] != ami_id: 
+     	if ami_in_db != []:
+		response = table.delete_item(
+		Key={
   		'AMI': ami_name,
-		'LatestID': ami_id
+		'LatestID': ami_in_db['LatestID']
          	}
      		)
-     		updated = True
-		ami_updated.append([ami_name,updated])
-	else:	
-		updated = False
-		ami_updated.append([ami_name,updated])
-     		print("no need to update")
+	response = table.put_item(
+ 	Item={
+	'AMI': ami_name,
+	'LatestID': ami_id
+        }
+     	)
+     	updated = True
+	ami_updated.append([ami_name,updated])
+else:	
+	updated = False
+	ami_updated.append([ami_name,updated])
+     	print("no need to update")
 
-	return ami_updated
+return ami_updated
+		
 		
 dynamodb_client = boto3.client('dynamodb', region_name='us-east-1')
 table_name = 'Latestamis'
